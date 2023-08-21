@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('color');
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }

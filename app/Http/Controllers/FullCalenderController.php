@@ -103,4 +103,17 @@ class FullCalenderController extends Controller
 
         return response()->json($event);
     }
+    public function updateEventCompleted(Request $request)
+    {
+        $event = Event::find($request->id);
+
+        if (!$event) {
+            return response()->json(['error' => 'Event not found'], 404);
+        }
+
+        $event->is_completed = $request->is_completed;
+        $event->save();
+
+        return response()->json($event);
+    }
 }

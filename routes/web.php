@@ -39,4 +39,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('full-calender', [FullCalenderController::class, 'index']);
     Route::post('full-calender/action', [FullCalenderController::class, 'action']);
     Route::post('/full-calender/update-event', [FullCalenderController::class, 'updateEvents']);
+    Route::post('/full-calender/update-event-completed', 'FullCalenderController@updateEventCompleted')->name('update.event.completed');
 });
