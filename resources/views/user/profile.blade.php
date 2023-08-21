@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Profile</h1>
-    <p>Name: {{ $user->name }}</p>
-    <p>Email: {{ $user->email }}</p>
-    <a href="{{ route('user.profile.edit') }}">Edit Profile</a>
+<div class = 'container'><h1>Профіль</h1>
+<p>Ім'я: {{ $user->name }}</p>
+<p>Email: {{ $user->email }}</p>
+<a class="btn btn-success" href="{{ route('user.profile.edit', ['user' => $user->id]) }}">
+    {{ __('Редагувати профіль') }}
+</a>
+</div>
 @endsection

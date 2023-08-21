@@ -19,12 +19,12 @@
         @extends('layouts.app')
 
         @section('content')
-      
+
         <br />
-    <div class='container'>
-        <div id="calendar"></div>
-    </div>
-    @endsection
+        <div class='container'>
+            <div id="calendar"></div>
+        </div>
+        @endsection
     </div>
 
     <script>
@@ -48,10 +48,10 @@
                 selectHelper: true,
                 select: function(start, end, allDay) {
                     var title = prompt('Event Title:');
+                    var color = prompt('Event Color (e.g. red, blue, green):');
 
-                    if (title) {
+                    if (title && color) {
                         var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-
                         var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
 
                         $.ajax({
@@ -61,6 +61,7 @@
                                 title: title,
                                 start: start,
                                 end: end,
+                                color: color, // Додайте параметр кольору
                                 type: 'add'
                             },
                             success: function(data) {
@@ -70,6 +71,7 @@
                         })
                     }
                 },
+
                 editable: true,
                 eventResize: function(event, delta) {
                     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
@@ -130,6 +132,27 @@
                             }
                         })
                     }
+                },
+                eventRender: function(event, element) {
+                    element.contextmenu(function() {
+                        var newTitle = prompt('Edit Event Title:', event.title);
+                        if (newTitle !== null) {
+                            event.title = newTitle;
+                            $.ajax({
+                                url: "/full-calender/update-event",
+                                type: "POST",
+                                data: {
+                                    id: event.id,
+                                    title: newTitle,
+                                    _token: $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function(response) {
+                                    calendar.fullCalendar('refetchEvents');
+                                    alert("Event Updated Successfully");
+                                }
+                            });
+                        }
+                    });
                 }
             });
 
