@@ -73,10 +73,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-<!-- Коментарі Розробника -->
+<h1> Коментарі Розробника </h1>
 Після завантаження проєкту розпаковуємо його, далі в Visual Studio Code. відкриваєм як папку, в файлі .env налаштовуємо БД, і надсилання емейлу. після чого в терміналі пишем php artisan migrate , та npm run dev якщо команда не працює то npm install а потім npm run dev далі php artisan serv та переходим по локальному сервері, якщо було налаштовано на онлайн сервері, проведіть налаштуваня, самостійно.
 Для коректної роботи відсилання листів змініть ці данні в файлі .env на свої
-<!-- 
+
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
@@ -85,4 +85,4 @@ MAIL_PASSWORD=your-mailtrap-password
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=your-email@example.com
 MAIL_FROM_NAME="${APP_NAME}" 
--->
+
