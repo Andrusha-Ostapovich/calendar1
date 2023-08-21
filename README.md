@@ -76,13 +76,19 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <h1> Коментарі Розробника </h1>
 Після завантаження проєкту розпаковуємо його, далі в Visual Studio Code. відкриваєм як папку, в файлі .env налаштовуємо БД, і надсилання емейлу. після чого в терміналі пишем php artisan migrate , та npm run dev якщо команда не працює то npm install а потім npm run dev далі php artisan serv та переходим по локальному сервері, якщо було налаштовано на онлайн сервері, проведіть налаштуваня, самостійно.
 Для коректної роботи відсилання листів змініть ці данні в файлі .env на свої
-
+<br>
 MAIL_MAILER=smtp
+<br>
 MAIL_HOST=smtp.mailtrap.io
+<br>
 MAIL_PORT=2525
 MAIL_USERNAME=your-mailtrap-username
+<br>
 MAIL_PASSWORD=your-mailtrap-password
+<br>
 MAIL_ENCRYPTION=tls
+<br>
 MAIL_FROM_ADDRESS=your-email@example.com
+<br>
 MAIL_FROM_NAME="${APP_NAME}" 
 
