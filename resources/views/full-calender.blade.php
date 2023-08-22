@@ -136,14 +136,17 @@
                 eventRender: function(event, element) {
                     element.contextmenu(function() {
                         var newTitle = prompt('Edit Event Title:', event.title);
-                        if (newTitle !== null) {
+                        var newColor = prompt('Edit Event Color:', event.title);
+                        if (newTitle && newColor !== null  ) {
                             event.title = newTitle;
+                            event.title = newColor;
                             $.ajax({
                                 url: "/full-calender/update-event",
                                 type: "POST",
                                 data: {
                                     id: event.id,
                                     title: newTitle,
+                                    color: newColor,
                                     _token: $('meta[name="csrf-token"]').attr('content')
                                 },
                                 success: function(response) {

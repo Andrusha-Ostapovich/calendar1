@@ -62,8 +62,7 @@
                                                      document.getElementById('profile').submit();">
                                     {{ __('Профіль') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('full-calender') }}" onclick="event.preventDefault();
-                                                     document.getElementById('home').submit();">
+                                <a class="dropdown-item" href="{{ route('full-calender') }}" >
                                     {{ __('Календар') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

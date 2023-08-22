@@ -12,9 +12,7 @@ class FullCalenderController extends Controller
 {
     public function index(Request $request)
     {
-        if (!auth()->check()) {
-            return response()->json(['error' => 'Unauthenticated'], 401);
-        }
+
 
         $user = auth()->user();
 
@@ -71,6 +69,7 @@ class FullCalenderController extends Controller
 
             if ($event) {
                 $event->update(['title' => $request->title]);
+                $event->update(['color' => $request->color]);
                 return response()->json($event);
             } else {
                 return response()->json(['error' => 'Event not found'], 404);
