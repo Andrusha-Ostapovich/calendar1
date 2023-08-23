@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReminderController;
 Route::resource('user', UserController::class);
 
 /*
@@ -40,4 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('full-calender/action', [FullCalenderController::class, 'action']);
     Route::post('/full-calender/update-event', [FullCalenderController::class, 'updateEvents']);
     Route::post('/full-calender/update-event-completed', 'FullCalenderController@updateEventCompleted')->name('update.event.completed');
+    Route::post('/full-calender/new-event', [EventController::class,'create'])->name('events.create');
+    Route::post('/full-calender/new-reminder', [ReminderController::class,'create'])->name('reminders.create');
+    Route::get('/get-reminders', 'ReminderController@getReminders')->name('get-reminders');
 });

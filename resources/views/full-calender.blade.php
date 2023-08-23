@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+@extends('layouts.app')
+@section('content')
 
 <head>
 
@@ -13,19 +15,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
 </head>
 
+
 <body>
 
     <div class="container">
-        @extends('layouts.app')
 
-        @section('content')
 
-        <br />
         <div class='container'>
+            <ul class="ml-auto">
+                <button data-bs-toggle="modal" data-bs-target="#newEvent" class="btn-info">+ Подія</button>
+                <button data-bs-toggle="modal" data-bs-target="#newReminder" class="btn-primary"> + Нагадування</button>
+                <div class="modal" id="newReminder" tabindex="-1" aria-labelledby="newReminderLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newReminderLabel">Додайте Нагадування</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ route('reminders.create') }}" enctype="application/x-www-form-urlencoded">
+                                    @csrf
+                                    <label for="rem_title">Введіть назву нагадування:</label>
+                                    <input type="text" id="rem_title" name="rem_title">
+                                    <br>
+                                    <br>
+                                    <label for="rem_color">Виберіть колір:</label>
+                                    <input type="color" id="rem_color" name="rem_color">
+                                    <br>
+                                    <br>
+                                    <label for="rem_datetime">Дата та час початку</label>
+                                    <input type="datetime-local" id="rem_datetime" name="rem_datetime">
+                                    @if(auth()->check())
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                    @endif
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Готово</button>
+                                    
+                            </div>
+
+                        </div>
+                        </form>
+
+
+            </ul>
             <div id="calendar"></div>
         </div>
-        @endsection
+
     </div>
+
+
+
+
 
     <script>
         $(document).ready(function() {
@@ -133,11 +173,12 @@
                         })
                     }
                 },
+                
                 eventRender: function(event, element) {
                     element.contextmenu(function() {
                         var newTitle = prompt('Edit Event Title:', event.title);
                         var newColor = prompt('Edit Event Color:', event.title);
-                        if (newTitle && newColor !== null  ) {
+                        if (newTitle && newColor !== null) {
                             event.title = newTitle;
                             event.title = newColor;
                             $.ajax({
@@ -161,7 +202,7 @@
 
         });
     </script>
-
+    @endsection
 </body>
 
 </html>

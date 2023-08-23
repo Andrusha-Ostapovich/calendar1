@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('reminders', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->id();
-            $table->string('title');
-            $table->datetime('start');
-            $table->datetime('end');
-            $table->string('color');
-            $table->boolean('is_completed')->default(false);
+            $table->string('rem_title')->nullable(false);
+            $table->datetime('rem_datetime');
+            $table->string('rem_color');
             $table->timestamps();
+            
+   
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('reminders');
     }
 };

@@ -12,16 +12,15 @@ class FullCalenderController extends Controller
 {
     public function index(Request $request)
     {
-
-
         $user = auth()->user();
 
         if ($request->ajax()) {
             $data = Event::where('user_id', $user->id)
                 ->whereDate('start', '>=', $request->start)
                 ->whereDate('end', '<=', $request->end)
-                ->get(['id', 'title', 'start', 'end', 'color']); // Додайте 'color' до вибірки
+                ->get(['id', 'title', 'start', 'end', 'color']); 
             return response()->json($data);
+            
         }
 
         return view('full-calender');

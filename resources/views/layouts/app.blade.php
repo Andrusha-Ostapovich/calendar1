@@ -58,8 +58,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('user.profile.edit', ['user' => Auth::user()]) }}" onclick="event.preventDefault();
-                                                     document.getElementById('profile').submit();">
+                                <a class="dropdown-item" href="{{ route('user.profile', ['user' => Auth::user()]) }}">
                                     {{ __('Профіль') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('full-calender') }}" >
@@ -70,12 +69,7 @@
                                     {{ __('Вийти') }}
                                 </a>
 
-                                <form id="profile" action="{{ route('user.profile', ['user' => Auth::user()]) }}" method="GET" class="d-none">
-                                    @csrf
-                                </form>
-                                <form id="home" action="{{ route('full-calender') }}" method="GET" class="d-none">
-                                    @csrf
-                                </form>
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -88,7 +82,11 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            @yield('content')   
+                
+            @include('models.event')
+         
+        
         </main>
     </div>
 </body>

@@ -9,7 +9,7 @@ class Event extends Model
 {
   use HasFactory;
   protected $fillable = [
-    'title', 'start', 'end', 'color', 'user_id'
+    'title', 'start', 'end', 'color', 'user_id',
   ];
   public function is_completed()
   {
