@@ -43,5 +43,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/full-calender/update-event-completed', 'FullCalenderController@updateEventCompleted')->name('update.event.completed');
     Route::post('/full-calender/new-event', [EventController::class,'create'])->name('events.create');
     Route::post('/full-calender/new-reminder', [ReminderController::class,'create'])->name('reminders.create');
-    Route::get('/get-reminders', 'ReminderController@getReminders')->name('get-reminders');
+
 });

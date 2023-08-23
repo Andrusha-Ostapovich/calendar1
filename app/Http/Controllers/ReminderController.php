@@ -33,17 +33,6 @@ class ReminderController extends Controller
         // Вивести повідомлення про помилку
 
     }
-    public function getReminders(Request $request)
-    {
-        $user = auth()->user();
-    
-        if ($request->ajax()) {
-            $data = Reminder::where('user_id', $user->id)
-                ->whereDate('rem_datetime', '>=', $request->start)
-                ->whereDate('rem_datetime', '<=', $request->end)
-                ->get(['id', 'rem_title as title', 'rem_datetime as start', 'rem_datetime as end', 'rem_color as color']);
-            return response()->json($data);
-        }
-    }
+
     
 }

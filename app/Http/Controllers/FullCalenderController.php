@@ -7,24 +7,31 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Jobs\StartEventNotification;
 use App\Jobs\CompleteEventNotification;
-
+use App\Models\Reminder;
 class FullCalenderController extends Controller
 {
     public function index(Request $request)
-    {
-        $user = auth()->user();
+{
+    $user = auth()->user();
+    $data = [];
 
-        if ($request->ajax()) {
-            $data = Event::where('user_id', $user->id)
-                ->whereDate('start', '>=', $request->start)
-                ->whereDate('end', '<=', $request->end)
-                ->get(['id', 'title', 'start', 'end', 'color']); 
-            return response()->json($data);
-            
-        }
+    if ($request->ajax()) {
+        $reminders = Reminder::where('user_id', $user->id)
+            ->whereDate('rem_datetime', '>=', $request->start)
+            ->whereDate('rem_datetime', '<=', $request->end)
+            ->get(['id', 'rem_title as title', 'rem_datetime as start', 'rem_datetime as end', 'rem_color as color']);
 
-        return view('full-calender');
+        $events = Event::where('user_id', $user->id)
+            ->whereDate('start', '>=', $request->start)
+            ->whereDate('end', '<=', $request->end)
+            ->get(['id', 'title', 'start', 'end', 'color']);
+
+        $data = $reminders->concat($events);
     }
+
+    return response()->json($data);
+}
+
 
     public function action(Request $request)
     {

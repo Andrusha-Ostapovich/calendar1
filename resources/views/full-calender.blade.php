@@ -50,7 +50,7 @@
                                     @endif
                                     <br>
                                     <button type="submit" class="btn btn-primary">Готово</button>
-                                    
+
                             </div>
 
                         </div>
@@ -78,12 +78,15 @@
 
             var calendar = $('#calendar').fullCalendar({
                 editable: true,
+
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                events: '/full-calender',
+                events:
+                    '/full-calender',
+
                 selectable: true,
                 selectHelper: true,
                 select: function(start, end, allDay) {
@@ -173,7 +176,7 @@
                         })
                     }
                 },
-                
+
                 eventRender: function(event, element) {
                     element.contextmenu(function() {
                         var newTitle = prompt('Edit Event Title:', event.title);
